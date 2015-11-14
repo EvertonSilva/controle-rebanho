@@ -18,10 +18,14 @@
 // tamanho dos Vetores e Matrizes
 #define     LIMTE_VETORES       5                   // tamanho dos vetores TIPO, ORIGEM, DESTINO
 #define     MAX_REBANHOS        10                  // número máximo de linhas da matriz REBANHO
+#define		LIMITE_TOSAS		5					// total de tosas para o rebanho
 // propriedades dos rebanhos
 #define     TIPO                0                   // código do tipo de overlha do rebanho
 #define     ORIG                1                   // código de origem da ovelha
 #define     QTDE                2                   // quantidade de ovelhas do rebanho
+// definições do sistema
+#define     LIMPATELA			system ("cls")
+#define     PAUSE				system ("pause")
 
 using namespace std;
 
@@ -40,6 +44,20 @@ void preencherVetor(char vetRef[])
                                             // A, B, C, D, E
     } // for
     return;
+}
+// Função para exibir um vetor
+// Parâmetros:
+//   Entrada:
+//      char vetRef[] - vetor de caracteres a ser exibido
+//   Retorno:
+//      void - Não tem valor de retorno
+void exibirVetor(char vetRef[], char *msg)
+{
+	cout << msg;
+	for (int i = 0; i < LIMTE_VETORES; i++)
+	{
+		cout << vetRef[i] << " ";
+	}
 }
 // Funcao para encontrar a posição de um valor dentro de um vetor
 // Parâmetros
@@ -60,7 +78,7 @@ int retornarIndice(char vetRef[], char cValor)
     return -1;                              // retorna -1 caso o valor digitado não exista no vetor
 }
 int main() {
-    setlocale(LC_ALL, "portuguese-brazil");     // suporte para caracteres com acento
+    setlocale(LC_ALL, "portuguese_brazil");     // suporte para caracteres com acento
 
     // 1. Controlar tipo, origem, destino
     //    Exigência: Armazenamento os valores em 3 vetores distintos
@@ -97,6 +115,8 @@ int main() {
     // menu simples
     while(true)
     {
+		LIMPATELA;
+
         cout << "*** MENU DE OPERAÇÔES ***" << endl;
 
         cout << "1 - Cadastrar Rebanho" << endl
@@ -110,15 +130,17 @@ int main() {
         {
             case '1':
                 // solicitar o Tipo de ovelha
-                cout << "Digite o Tipo de ovelha: ";
+				exibirVetor(vetTipo, "Tipos de ovelhas: ");						// exibir tipos de ovelhas
+				cout << "\nDigite o Tipo de ovelha: ";
                 cin >> cTipoOvelha;
 
                 // solicitar a Origem da Ovelha
-                cout << "Digite a origem do rebanho: ";
+				exibirVetor(vetOrigem, "Origens do rebanho: ");					// exibir origem das ovelhas
+                cout << "\nDigite a origem do rebanho: ";
                 cin >> cOrigem;
 
                 // solicitar a quantidade de ovelhas
-                cout << "Digite a quantidade de ovelhas do rebanho: ";
+                cout << "\nDigite a quantidade de ovelhas do rebanho: ";
                 cin >> matRebanho[codRebanho][QTDE];
 
                 matRebanho[codRebanho][TIPO] = retornarIndice(vetTipo, cTipoOvelha);
